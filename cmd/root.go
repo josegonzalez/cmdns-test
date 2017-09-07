@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/gosuri/cmdns"
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -43,6 +44,7 @@ to quickly create a Cobra application.`,
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	cmdns.Namespace(RootCmd)
 	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)

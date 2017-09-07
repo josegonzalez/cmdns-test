@@ -17,6 +17,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/gosuri/cmdns"
 	"github.com/spf13/cobra"
 )
 
@@ -34,8 +35,16 @@ to quickly create a Cobra application.`,
 		fmt.Println("apps called")
 	},
 }
+var infoSubcmd = &cobra.Command{
+	Use: "info",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("apps:info called")
+	},
+}
 
 func init() {
+	appsCmd.AddCommand(infoSubcmd)
+	cmdns.Namespace(appsCmd)
 	RootCmd.AddCommand(appsCmd)
 
 	// Here you will define your flags and configuration settings.
